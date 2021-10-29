@@ -134,7 +134,6 @@ class Grid:
             print()
 
     def tile_color(self, tile):
-        # print(self.start, self.end, self.trace, self.close)
         if tile == self.start:
             return GREEN
         if tile == self.end:
