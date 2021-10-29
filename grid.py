@@ -1,5 +1,5 @@
 import math
-from colors import BLUE, GREEN, ORANGE, RED
+from colors import BLUE, CYAN, GREEN, ORANGE, RED
 from tile import Tile
 
 
@@ -11,6 +11,7 @@ class Grid:
         self._open: list[Tile] = []
         self._close: list[Tile] = []
         self._trace = []
+        self._allow_diagonals = False
         self.maze = maze
 
     @property
@@ -41,6 +42,17 @@ class Grid:
     def maze(self):
         return self.maze
 
+    @property
+    def allow_diagonals(self):
+        return self._allow_diagonals
+
+    @allow_diagonals.setter
+    def allow_diagonals(self, new_val):
+        if new_val == self._allow_diagonals:
+            return
+        self._allow_diagonals = new_val
+        self.maze = self._maze
+
     @maze.setter
     def maze(self, new_maze):
         if isinstance(new_maze, str):
@@ -54,7 +66,7 @@ class Grid:
         self._load()
         for row in self._tiles:
             for node in row:
-                node.init(self._end, self)
+                node.init(self._end, self, self._allow_diagonals)
         self._start.g = 0
 
     def _load(self):
@@ -82,13 +94,14 @@ class Grid:
                 _i = i
         return self._open.pop(_i)
 
-    def a_star(self, func=None):
+    def a_star(self):
+        self._open = []
+        self._close = []
+        self._trace = []
         self._open.append(self._start)
         while len(self._open) > 0:
             if self._a_star_step():
                 break
-            if func:
-                func(self.open)
 
         cur = self._end
         self._trace = []
@@ -128,6 +141,8 @@ class Grid:
             return RED
         if tile in self.trace:
             return BLUE
+        if tile in self.open:
+            return CYAN
         if tile in self.close:
             return ORANGE
         return tile.color
