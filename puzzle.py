@@ -1,6 +1,7 @@
 import os
 import random
 import pygame
+from colors import BLACK
 from grid import Grid
 
 
@@ -37,6 +38,18 @@ class Maze:
                 x += 1
             x = 0
             y += 1
+
+        for i in range(len(self.grid.tiles[0])):
+            x1 = self.wts*i
+            x2 = x1+self.wts-1
+            pygame.draw.line(surface, BLACK, (x1, 0), (x1, self.height))
+            pygame.draw.line(surface, BLACK, (x2, 0), (x2, self.height))
+
+        for i in range(len(self.grid.tiles)):
+            y1 = self.hts*i
+            y2 = y1+self.hts-1
+            pygame.draw.line(surface, BLACK, (0, y1), (self.width, y1))
+            pygame.draw.line(surface, BLACK, (0, y2), (self.width, y2))
 
     def a_star(self):
         self.grid.a_star()
