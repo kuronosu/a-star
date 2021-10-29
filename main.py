@@ -4,6 +4,8 @@ from colors import BLACK
 from puzzle import Maze
 pygame.init()
 
+pygame.display.set_caption('A* algorithm')
+
 size = width, height = 700, 700
 screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
