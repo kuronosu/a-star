@@ -59,7 +59,7 @@ class Tile:
         return abs(final.x - self.x) + abs(final.y - self.y)
 
     def cost_g(self, other):
-        # Si el movimiento es horizontal o vertical el costo es 10, si es diagonal el costo es 14
+        # Si el movimiento es horizontal o vertical el costo es 1, si es diagonal el costo es 1.4
         return 1 if self.x == other.x or self.y == other.y else 1.4
 
     def __eq__(self, o: object) -> bool:

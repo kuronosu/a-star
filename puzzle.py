@@ -102,9 +102,17 @@ class Maze:
                     row += "o"
             maze.append(row)
         maze = "\n".join(maze)
-        maze = f"i{maze[1:]}"
-        maze = f"{maze[:-1]}f"
-        return maze
+        i = random.randint(0, len(maze)-1)
+        while maze[i] == '\n':
+            i = random.randint(0, len(maze)-1)
+        maze = list(maze)
+        f = random.randint(0, len(maze)-1)
+        while i == f or maze[f] == '\n':
+            f = random.randint(0, len(maze)-1)
+        maze = list(maze)
+        maze[i] = 'i'
+        maze[f] = 'f'
+        return "".join(maze)
 
     def generate_random(self, x_tiles, y_tiles, ratio=30):
         self.grid.maze = self._random(x_tiles, y_tiles, ratio)
