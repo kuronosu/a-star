@@ -59,7 +59,7 @@ class Maze:
         if not os.path.exists(filename):
             if not random:
                 raise FileNotFoundError(f'{filename} does not exist')
-            return cls.random(10, 10, width, height)
+            return cls.random(25, 25, width, height)
         with open(filename, 'r', encoding='utf-8') as f:
             columns = None
             maze = []

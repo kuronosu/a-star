@@ -40,7 +40,7 @@ class Grid:
 
     @property
     def maze(self):
-        return self.maze
+        return self._maze
 
     @property
     def allow_diagonals(self):
